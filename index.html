@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    const root = ReactDOM.createRoot(document.getElementById("root"));
+
+    function MinutesToHours() {
+      const labelStyle = {
+        display: "block",
+        fontWeight: 600,
+        fontSize: 20,
+      };
+      const divStyle = {
+        marginBottom: "10px",
+        flex: 1,
+      };
+      const [num1, setNum1] = React.useState(0);
+      const [num2, setNum2] = React.useState(0);
+      const [switched, setSwitched] = React.useState(false);
+      const onReset = () => {
+        setNum1(0);
+        setNum2(0);
+      };
+      const onSwitch = () => {
+        const switchToggle = document.querySelector(".switch");
+        switchToggle.classList.toggle("toggle");
+        setSwitched((current) => !current);
+      };
+      const onChange1 = (e) => {
+        const num = e.target.value / 60;
+        setNum1(e.target.value);
+        setNum2(Math.round(num * 100) / 100);
+      };
+      const onChange2 = (e) => {
+        const num = e.target.value * 60;
+        setNum1(num);
+        setNum2(e.target.value);
+      };
+      return (
+        <div>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              gap: 20,
+            }}
+          >
+            <div style={divStyle}>
+              <label htmlFor="num1" style={labelStyle}>
+                Minutes
+              </label>
+              <input
+                value={num1}
+                id="num1"
+                type="number"
+                placeholder="Minutes"
+                onChange={onChange1}
+                disabled={switched}
+                min="0"
+              />
+            </div>
+            <div className={switched ? "arrow-left" : "arrow-right"}></div>
+            <div style={divStyle}>
+              <label htmlFor="num2" style={labelStyle}>
+                Hours
+              </label>
+              <input
+                value={num2}
+                id="num2"
+                type="number"
+                placeholder="Hours"
+                onChange={onChange2}
+                disabled={!switched}
+                min="0"
+              />
+            </div>
+          </div>
+          <div className="btnGroup">
+            <div>
+              <button onClick={onReset} className="resetIcon yellow">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  x="0px"
+                  y="0px"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M 2 2 L 4.9394531 4.9394531 C 3.1262684 6.7482143 2 9.2427079 2 12 C 2 17.514 6.486 22 12 22 C 17.514 22 22 17.514 22 12 C 22 6.486 17.514 2 12 2 L 12 4 C 16.411 4 20 7.589 20 12 C 20 16.411 16.411 20 12 20 C 7.589 20 4 16.411 4 12 C 4 9.7940092 4.9004767 7.7972757 6.3496094 6.3496094 L 9 9 L 9 2 L 2 2 z"></path>
+                </svg>
+              </button>
+              <span>Reset</span>
+            </div>
+            <div>
+              {switched ? <span>Hours</span> : <span>Minutes</span>}
+              <button className="switch" onClick={onSwitch}></button>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    function KmToMiles() {
+      const labelStyle = {
+        display: "block",
+        fontWeight: 600,
+        fontSize: 20,
+      };
+      const divStyle = {
+        marginBottom: "10px",
+        flex: 1,
+      };
+      const [num1, setNum1] = React.useState(0);
+      const [num2, setNum2] = React.useState(0);
+      const [switched, setSwitched] = React.useState(false);
+      const onReset = () => {
+        setNum1(0);
+        setNum2(0);
+      };
+      const onSwitch = () => {
+        const switchToggle = document.querySelector(".switch");
+        switchToggle.classList.toggle("toggle");
+        setSwitched((current) => !current);
+      };
+      const onChange1 = (e) => {
+        const num = e.target.value / 1.609;
+        setNum1(e.target.value);
+        setNum2(Math.round(num * 100) / 100);
+      };
+      const onChange2 = (e) => {
+        const num = e.target.value * 1.609;
+        setNum1(num);
+        setNum2(e.target.value);
+      };
+      return (
+        <div>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              gap: 20,
+            }}
+          >
+            <div style={divStyle}>
+              <label htmlFor="num1" style={labelStyle}>
+                Kilometers
+              </label>
+              <input
+                value={num1}
+                id="num1"
+                type="number"
+                placeholder="Kilometers"
+                onChange={onChange1}
+                disabled={switched}
+                min="0"
+              />
+            </div>
+            <div className={switched ? "arrow-left" : "arrow-right"}></div>
+            <div style={divStyle}>
+              <label htmlFor="num2" style={labelStyle}>
+                Miles
+              </label>
+              <input
+                value={num2}
+                id="num2"
+                type="number"
+                placeholder="Miles"
+                onChange={onChange2}
+                disabled={!switched}
+                min="0"
+              />
+            </div>
+          </div>
+          <div className="btnGroup">
+            <div>
+              <button onClick={onReset} className="resetIcon yellow">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  x="0px"
+                  y="0px"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M 2 2 L 4.9394531 4.9394531 C 3.1262684 6.7482143 2 9.2427079 2 12 C 2 17.514 6.486 22 12 22 C 17.514 22 22 17.514 22 12 C 22 6.486 17.514 2 12 2 L 12 4 C 16.411 4 20 7.589 20 12 C 20 16.411 16.411 20 12 20 C 7.589 20 4 16.411 4 12 C 4 9.7940092 4.9004767 7.7972757 6.3496094 6.3496094 L 9 9 L 9 2 L 2 2 z"></path>
+                </svg>
+              </button>
+              <span>Reset</span>
+            </div>
+            <div>
+              {switched ? <span>Kilometers</span> : <span>Miles</span>}
+              <button className="switch" onClick={onSwitch}></button>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    function App() {
+      const [index, setIndex] = React.useState();
+
+      function onSelect(e) {
+        const list = document.querySelector(".list");
+        list.classList.toggle("toggle");
+      }
+      function onClickList(e) {
+        const list = document.querySelector(".list");
+        setIndex(e.target.value);
+        list.classList.remove("toggle");
+      }
+      return (
+        <div className="wrap">
+          <div className="bigTitle">
+            <div className="wrap">
+              <h1>Super Converter</h1>
+              <button
+                onClick={() => {
+                  setIndex();
+                  const list = document.querySelector(".list");
+                  list.classList.remove("toggle");
+                }}
+                className="resetIcon"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  x="0px"
+                  y="0px"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M 2 2 L 4.9394531 4.9394531 C 3.1262684 6.7482143 2 9.2427079 2 12 C 2 17.514 6.486 22 12 22 C 17.514 22 22 17.514 22 12 C 22 6.486 17.514 2 12 2 L 12 4 C 16.411 4 20 7.589 20 12 C 20 16.411 16.411 20 12 20 C 7.589 20 4 16.411 4 12 C 4 9.7940092 4.9004767 7.7972757 6.3496094 6.3496094 L 9 9 L 9 2 L 2 2 z"></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+          <article className="container" style={{ paddingBottom: 0 }}>
+            <button className="select" onClick={onSelect}>
+              {index === 0
+                ? "Minutes To Hours"
+                : index === 1
+                ? "Km To Miles"
+                : "Please select one!"}
+            </button>
+            <ul className="list">
+              <li
+                onClick={onClickList}
+                value="0"
+                className={index === 0 ? "active" : ""}
+              >
+                Minutes To Hours
+              </li>
+              <li
+                onClick={onClickList}
+                value="1"
+                className={index === 1 ? "active" : ""}
+              >
+                Km To Miles
+              </li>
+            </ul>
+          </article>
+          <main className="container">
+            {index === 0 ? (
+              <MinutesToHours />
+            ) : index === 1 ? (
+              <KmToMiles />
+            ) : (
+              <img
+                className="mainImg"
+                src="calculator.png"
+                alt="Calculator Image"
+              />
+            )}
+          </main>
+        </div>
+      );
+    }
+
+    function Render() {
+      root.render(<App />);
+    }
+
+    Render();
+  </script>
+</html>
